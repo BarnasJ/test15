@@ -2,21 +2,25 @@ pipeline {
     agent any
 
     stages {
+        stage('Download maven') {
+            steps {
+                echo 'Download Maven..'
+                sh "curl https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz --output maven.tar.gz"
+                sh "tar -zxvf maven.tar.gz"
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Building2..'
-                mvn install
+                sh "./apache-maven-3.8.6/bin/mvn install -DskipTests"
             }
         }
-        stage('Test2') {
+
+        stage('Test') {
             steps {
                 echo 'Testing..'
-                mvn test
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                sh "./apache-maven-3.8.6/bin/mvn test"
             }
         }
     }
