@@ -11,7 +11,7 @@ public class PrettyTest {
 
     @BeforeAll
     public static void setup() {
-        System.setProperty("selenide.remote", "http://0.0.0.0:4444/wd/hub");
+        System.setProperty("selenide.remote", "http://172.19.0.3:4444/wd/hub");
         System.setProperty("selenide.browser", "chrome");
     }
 
